@@ -1,0 +1,65 @@
+<!-- templates/gallery.html -->
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>Galeri Gambar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Game Forum</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">Threads</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('post') }}">Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('gallery') }}">Gallery</a>
+                </li>
+            </ul>
+            <button id="dark-mode-toggle" class="btn btn-sm btn-outline-secondary" style="z-index: 1000;">
+                <i class="bi bi-moon"></i> Dark Mode
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-4">
+    <h1 class="mb-4">Galeri Gambar</h1>
+    {% if images_by_date %}
+    {% for date, images in images_by_date.items() %}
+    <h3 class="mb-3">{{ date }}</h3>
+    <div class="row mb-4">
+        {% for img in images %}
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card">
+                <img src="{{ img.url }}" class="card-img-top" alt="Gallery image" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <p class="card-text"><small class="text-muted">Uploaded: {{ img.date }}</small></p>
+                    <button class="btn btn-danger btn-sm delete-btn" data-public-id="{{ img.public_id }}">Hapus</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    {% else %}
+    <p class="text-muted">Belum ada gambar di galeri.</p>
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
+</body>
+</html>

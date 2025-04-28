@@ -1,0 +1,131 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Forum Diskusi Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Game Forum</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('index') }}">Threads</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('post') }}">Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('gallery') }}">Gallery</a>
+        </li>
+      </ul>
+      <button id="dark-mode-toggle" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-moon"></i> Dark Mode
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-4">
+  <h1 class="mb-4">Threads</h1>
+
+  <!-- Daftar Thread -->
+  <div id="threads-list">
+    {% for thread in threads %}
+    <div class="card mb-3 thread-card" data-thread-id="{{ thread.id }}">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <small class="text-muted">Posted by: {{ thread.username|default('Anonymous') }} on {{ thread.created_at }}</small>
+            <h5 class="card-title mb-0">{{ thread.title }}</h5>
+          </div>
+          <button class="btn btn-sm like-btn" data-liked="{{ thread.liked|default('false') }}">
+            <i class="bi {{ 'bi-star-fill text-warning' if thread.liked|default('false') else 'bi-star' }}"></i>
+            <span class="like-count">{{ thread.likes|default(0) }}</span>
+          </button>
+        </div>
+        <p class="card-text">{{ thread.description }}</p>
+        {% if thread.image %}
+        <img src="{{ thread.image.url }}" class="img-fluid rounded mb-3 thread-img" alt="Thread image" style="max-height: 300px; object-fit: cover;" onclick="showModal('{{ thread.image.url }}')">
+        <small class="text-muted d-block mb-2">Uploaded: {{ thread.image.date }}</small>
+        {% endif %}
+        <hr>
+        <h6>Komentar</h6>
+        <div class="comments-list mb-3">
+          {% for comment_index, comment in thread.comments|enumerate %}
+          <div class="comment" data-comment-index="{{ comment_index }}">
+            <div class="border-bottom py-2">
+              <strong>{{ comment.username }}</strong> <small class="text-muted">({{ comment.created_at }})</small>
+              <p class="mb-1">{{ comment.content }}</p>
+              <button class="btn btn-sm btn-link reply-btn p-0">Balas</button>
+            </div>
+            <div class="replies ms-4 mt-2">
+              {% for reply in comment.replies|default([]) %}
+              <div class="border-bottom py-2">
+                <strong>{{ reply.username }}</strong> <small class="text-muted">({{ reply.created_at }})</small>
+                <p class="mb-1">{{ reply.content }}</p>
+                {% if reply.image %}
+                <img src="{{ reply.image.url }}" class="img-fluid rounded mb-2 reply-img" alt="Reply image" style="max-height: 200px; object-fit: cover;" onclick="showModal('{{ reply.image.url }}')">
+                <small class="text-muted d-block mb-1">Uploaded: {{ reply.image.date }}</small>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            <form class="reply-form d-none mt-2 ms-4">
+              <div class="mb-2">
+                <input type="text" class="form-control form-control-sm" name="content" placeholder="Tulis balasan..." required>
+              </div>
+              <div class="mb-2">
+                <input type="file" class="form-control form-control-sm" name="image" accept="image/*">
+              </div>
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-sm btn-primary">Kirim</button>
+                <button type="button" class="btn btn-sm btn-secondary cancel-reply">Batal</button>
+              </div>
+            </form>
+          </div>
+          {% endfor %}
+        </div>
+        <form class="comment-form">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Tambah komentar..." required>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Modal Preview -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <img id="modalImage" src="#" class="img-fluid w-100" alt="Preview">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function showModal(url) {
+    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+    document.getElementById('modalImage').src = url;
+    modal.show();
+  }
+</script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

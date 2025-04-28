@@ -1,0 +1,71 @@
+[
+  {
+    "id": 3,
+    "title": "lmao",
+    "description": "nyahahahaha",
+    "username": "Anonymous",
+    "image": {
+      "url": "https://res.cloudinary.com/dythukp5j/image/upload/v1745828393/xnvy4mctaklszia9stbd.png",
+      "public_id": "xnvy4mctaklszia9stbd",
+      "date": "2025-04-28 15:19:53"
+    },
+    "comments": [
+      {
+        "username": "Anonymous",
+        "content": "hoki betul",
+        "created_at": "2025-04-28 15:20:33",
+        "replies": [
+          {
+            "username": "Anonymous",
+            "content": "edan emang",
+            "image": null,
+            "created_at": "2025-04-28 16:03:56"
+          }
+        ]
+      }
+    ],
+    "likes": 0,
+    "liked": false,
+    "created_at": "2025-04-28 15:19:53"
+  },
+  {
+    "id": 2,
+    "title": "Apaan nih",
+    "description": "Bejir",
+    "username": "Anonymous",
+    "image": {
+      "url": "https://res.cloudinary.com/dythukp5j/image/upload/v1745828268/lcminyqzuifrdjidkicd.jpg",
+      "public_id": "lcminyqzuifrdjidkicd",
+      "date": "2025-04-28 15:17:48"
+    },
+    "comments": [],
+    "likes": 1,
+    "liked": true,
+    "created_at": "2025-04-28 15:17:48"
+  },
+  {
+    "id": 1,
+    "title": "Gacha hoki tapi ampas",
+    "description": "Gue dapet adukan dodol 2 kali gue maunya mitspliter",
+    "image": {
+      "url": "https://res.cloudinary.com/dythukp5j/image/upload/v1745826792/il6rt4eg1whxg5uj0fzw.png",
+      "public_id": "il6rt4eg1whxg5uj0fzw",
+      "date": "2025-04-28 14:53:12"
+    },
+    "comments": [
+      {
+        "username": "Anonymous",
+        "content": "bejirrr adukan dodol",
+        "created_at": "2025-04-28 15:05:12"
+      },
+      {
+        "username": "Anonymous",
+        "content": "gg",
+        "created_at": "2025-04-28 15:17:59"
+      }
+    ],
+    "created_at": "2025-04-28 14:53:12",
+    "liked": true,
+    "likes": 1
+  }
+]

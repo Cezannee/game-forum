@@ -1,0 +1,104 @@
+/* static/style.css */
+#drop-area:hover {
+    background-color: #f8f9fa;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.thread-img, .reply-img {
+    max-height: 300px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.reply-img {
+    max-height: 200px;
+}
+
+.card {
+    transition: all 0.3s ease;
+}
+
+body.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] body {
+    background-color: #212529 !important;
+}
+
+[data-bs-theme="dark"] .card {
+    background-color: #2c3034;
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] #drop-area {
+    background-color: #343a40;
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] #drop-area:hover {
+    background-color: #495057;
+}
+
+[data-bs-theme="dark"] .navbar-light {
+    background-color: #343a40 !important;
+}
+
+[data-bs-theme="dark"] .navbar-light .navbar-brand,
+[data-bs-theme="dark"] .navbar-light .nav-link {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .navbar-light .nav-link:hover {
+    color: #fff !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+    color: #6c757d !important;
+}
+
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h3 {
+    color: #adb5bd;
+}
+
+#dark-mode-toggle {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.like-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.like-btn i {
+    font-size: 1.2rem;
+}
+
+.reply-btn {
+    font-size: 0.875rem;
+}
+
+.replies {
+    border-left: 2px solid #dee2e6;
+    padding-left: 1rem;
+}
+
+[data-bs-theme="dark"] .replies {
+    border-left-color: #495057;
+}
